@@ -1,4 +1,44 @@
 {
- "schemaVersion": 2,
- "templateId": "node/10.16.0"
+  "captainVersion": "1",
+  "dockerCompose": {
+    "services": {
+      "$$cap_appname": {
+        "containerHttpPort": "4000",
+        "environment": {
+          "DB_NAME": "owntracks_endpoint",
+          "DB_USER": "postgres",
+          "DB_PASS": "$$cap_db_owntracks_endpoint_password",
+          "DB_HOST": "srv-captain--$$cap_appname-db",
+          "DB_PORT": "5432"
+        },
+        "image": "logangorence/owntracks-endpoint:latest",
+        "restart": "always"
+      },
+      "$$cap_appname-db": {
+        "environment": {
+          "POSTGRES_DB": "owntracks_endpoint",
+          "POSTGRES_PASSWORD": "$$cap_db_password",
+          "PGDATA": "/pgdata"
+        },
+        "image": "postgres:11",
+        "restart": "always",
+        "volumes": [
+          "$$cap_appname-postgres-data:/pgdata"
+        ]
+      }
+    },
+    "version": "2",
+    "volumes": {
+      "$$cap_appname-data": {},
+      "$$cap_appname-postgres-data": {}
+    }
+  },
+  "variables": [
+    {
+      "description": "Password for postgres user that will be created on Postgres",
+      "id": "$$cap_db_password",
+      "label": "Postgres user password",
+      "validRegex": "/^(?=.*\\d).{10,}$/"
+    }
+  ]
 }
