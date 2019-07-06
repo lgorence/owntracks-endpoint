@@ -1,5 +1,6 @@
 {
-  "captainVersion": "1",
+  "captainVersion": 1,
+  "schemaVersion": 2,
   "dockerCompose": {
     "services": {
       "$$cap_appname": {
