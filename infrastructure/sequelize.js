@@ -2,7 +2,7 @@ let Sequelize = require("sequelize");
 
 let dbName = process.env.DB_NAME || "owntracks_endpoint";
 let dbUser = process.env.DB_USER || "postgres";
-let dbPass = process.env.DB_PASS || "";
+let dbPass = process.env.DB_PASS || "postgres";
 let dbHost = process.env.DB_HOST || "localhost";
 let dbPort = process.env.DB_PORT || 5432;
 

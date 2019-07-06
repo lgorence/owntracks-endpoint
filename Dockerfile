@@ -1,19 +1,15 @@
 FROM node:10
 
-# Create app directory
 WORKDIR /usr/src/app
-
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
 COPY package*.json ./
-
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
-
-# Bundle app source
+RUN npm ci --only=production
 COPY . .
+
+ENV DB_NAME owntracks_endpoint
+ENV DB_USER postgres
+ENV DB_PASS postgres
+ENV DB_HOST localhost
+ENV DB_PORT 5432
 
 EXPOSE 4000
 CMD [ "node", "bin/www" ]
