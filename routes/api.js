@@ -5,8 +5,10 @@ let Location = require('../models/location');
 router.post('/publish', function(req, res, next) {
     let message = req.body;
     if (message._type !== 'location') {
-        next();
+        res.sendStatus(400);
+        return;
     }
+    console.log(message);
 
     Location.create({
         latitude: message.lat,
