@@ -10,10 +10,13 @@ router.post('/publish', function(req, res, next) {
     }
     console.log(message);
 
+    let topic = message.topic;
+    topic = topic.substring(topic.indexOf('/'));
+
     Location.create({
         latitude: message.lat,
         longitude: message.lon,
-        deviceId: message.tid
+        deviceId: topic
     });
 
     res.sendStatus(200);
