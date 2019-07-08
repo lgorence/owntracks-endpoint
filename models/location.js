@@ -16,7 +16,7 @@ let Location = db.define('location', {
     freezeTableName: true
 });
 
-Location.sync({force: true}).then(() => {
+Location.sync({force: false}).then(() => {
     console.log(`User table created`);
 }).catch(err => {
     console.log(err);
